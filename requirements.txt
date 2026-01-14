@@ -1,6 +1,7 @@
 fastapi
-uvicorn
+uvicorn[standard]
 authlib
 python-dotenv
 requests
 python-jose
+httpx
