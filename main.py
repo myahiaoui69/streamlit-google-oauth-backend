@@ -18,6 +18,8 @@ GOOGLE_CLIENT_ID = os.environ["GOOGLE_CLIENT_ID"]
 GOOGLE_CLIENT_SECRET = os.environ["GOOGLE_CLIENT_SECRET"]
 JWT_SECRET = os.environ["JWT_SECRET"]
 
+BACKEND_URL = os.environ["BACKEND_URL"]
+
 oauth = OAuth()
 
 oauth.register(
@@ -37,7 +39,7 @@ def root():
 @app.get("/login")
 async def login(request: Request):
     # Redirige l'utilisateur vers Google
-    redirect_uri = request.url_for("auth_callback")
+    redirect_uri = f"{BACKEND_URL}/callback"
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 @app.get("/callback")
