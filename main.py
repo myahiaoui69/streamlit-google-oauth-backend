@@ -4,8 +4,14 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from authlib.integrations.starlette_client import OAuth
 from jose import jwt
 from datetime import datetime, timedelta
+from starlette.middleware.sessions import SessionMiddleware  # <-- ajouté
+
 
 app = FastAPI()
+
+# Middleware des sessions (nécessaire pour Authlib)
+app.add_middleware(SessionMiddleware, secret_key=os.environ["JWT_SECRET"])
+
 
 # Chargés depuis Railway (Variables d’environnement)
 GOOGLE_CLIENT_ID = os.environ["GOOGLE_CLIENT_ID"]
